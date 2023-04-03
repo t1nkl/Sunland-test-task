@@ -12,9 +12,11 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
     </head>
     <body>
-        <div id="app" {{ vue_component('App') }}></div>
+        <div id="app"></div>
+        {{ encore_entry_script_tags('app') }}
         {% block body %}{% endblock %}
     </body>
 </html>

@@ -10,9 +10,3 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
-
-import { registerVueControllerComponents } from '@symfony/ux-vue';
-registerVueControllerComponents(require.context('./vue', true, /\.vue$/));
-// If you prefer to lazy-load your Vue.js controller components, in order to reduce to keep the JavaScript bundle the smallest as possible,
-// and improve performances, you can use the following line instead:
-//registerVueControllerComponents(require.context('./vue/controllers', true, /\.vue$/, 'lazy'));
