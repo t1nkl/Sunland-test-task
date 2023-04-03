@@ -3,8 +3,8 @@
 namespace App\Validator;
 
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Exception\ValidatorException;
+use Symfony\Component\Validator\Validation;
 
 class LoginValidator
 {
@@ -24,7 +24,7 @@ class LoginValidator
             ]
         );
         if (count($errors) > 0) {
-            throw new ValidatorException((string) $errors);
+            throw new ValidatorException((string)$errors);
         }
 
         // Validate password
@@ -36,7 +36,7 @@ class LoginValidator
             ]
         );
         if (count($errors) > 0) {
-            throw new ValidatorException((string) $errors);
+            throw new ValidatorException((string)$errors);
         }
 
         return true;

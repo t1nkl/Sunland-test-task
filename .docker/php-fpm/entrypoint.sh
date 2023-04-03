@@ -13,4 +13,6 @@ npm run build
 # Symfony migration
 php bin/console doctrine:migrations:migrate
 
+php bin/console app:create-user example@mail.com example@mail.com
+
 php-fpm

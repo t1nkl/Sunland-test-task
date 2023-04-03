@@ -7,13 +7,15 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { defineComponent, reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import axios from 'axios'
 
-export default {
+export default defineComponent({
   name: 'LogoutForm',
   setup() {
     const router = useRouter()
+
 
     const state = reactive({
       token: localStorage.getItem('token') || null,
@@ -21,35 +23,48 @@ export default {
     })
 
     async function handleLogout() {
-      await request('post', '/api/v1/logout');
+      await requestApi('post', '/api/v1/logout', {});
 
       state.token = null
       localStorage.removeItem('token')
-      await router.push('/login')
+      router.push('/login')
     }
 
-    const request = async (method, url) => {
+    async function requestApi(method, url, data = {}) {
+      const token = localStorage.getItem('token');
+
+      const headers = {
+        'Content-Type': 'application/json',
+      };
+
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
+      }
+
+      const config = {
+        method,
+        url,
+        headers,
+      };
+
+      if (method === 'get') {
+        config.params = data;
+      } else {
+        config.data = data;
+      }
+
       try {
-        const response = await fetch(url, {
-          method: method,
-          headers: {
-            'Authorization': `Bearer ${state.token}`
-          }
-        })
-        if (response.status === 401) {
-          // handle unauthorized request
-          throw new Error('Unauthorized')
-        }
-        return await response.json()
+        const response = await axios(config);
+
+        return response.data;
       } catch (error) {
-        console.error(error)
-        state.error = error
+        console.error(error);
       }
     }
 
     return {
-      handleLogout,
+      handleLogout
     }
   }
-}
+})
 </script>
