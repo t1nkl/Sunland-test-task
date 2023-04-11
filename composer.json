@@ -1,5 +1,13 @@
 {
+    "name": "t1nkl/sunland-test-task",
+    "description": "Sunland test task",
     "type": "project",
+    "authors": [
+        {
+            "name": "Kyryll Kovalenko",
+            "email": "kyryll.kovalenko@gmail.com"
+        }
+    ],
     "license": "proprietary",
     "minimum-stability": "dev",
     "prefer-stable": true,
